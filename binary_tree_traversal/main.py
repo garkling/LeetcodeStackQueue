@@ -1,14 +1,31 @@
-def tree_by_levels(root):
-    tree_list = []
-    queue = [root] if root else []
+# Pre-order traversal
+def pre_order(node, order=None):
+    order = order or []
+    if node:
+        order.append(node.data)
+        order = pre_order(node.left, order)
+        order = pre_order(node.right, order)
 
-    while len(queue):
-        tree_list.append(queue[0].value)
-        node = queue.pop(0)
+    return order
 
-        if node.left is not None:
-            queue.append(node.left)
-        if node.right is not None:
-            queue.append(node.right)
 
-    return tree_list
+# In-order traversal
+def in_order(node, order=None):
+    order = order or []
+    if node:
+        order = in_order(node.left, order)
+        order.append(node.data)
+        order = in_order(node.right, order)
+
+    return order
+
+
+# Post-order traversal
+def post_order(node, order=None):
+    order = order or []
+    if node:
+        order = post_order(node.left, order)
+        order = post_order(node.right, order)
+        order.append(node.data)
+
+    return order
